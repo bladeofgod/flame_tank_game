@@ -1,3 +1,5 @@
+import 'package:flametankgame/tank_game.dart';
+import 'package:flametankgame/widgets/joypad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -14,16 +16,36 @@ void main()async {
   ///禁止所有UI层（全面屏）
   await SystemChrome.setEnabledSystemUIOverlays([]);
 
+  ///游戏
+  final TankGame tankGame = TankGame();
+
   runApp(Directionality(
       textDirection: TextDirection.ltr,
       child: Stack(
         children: [
-          //为游戏提供占位符
-          Container(
-            color: Color(0xff27ae60),
-          ),
+
+          tankGame.widget,
           //摇杆
-          Container(),
+          Column(
+            children: [
+
+              Spacer(),
+              Row(
+                children: [
+                  SizedBox(width: 48),
+                  Joypad(
+                    onchange: (Offset delta)=>print(delta),
+                  ),
+                  Spacer(),
+                  Joypad(
+                    onchange: (Offset delta)=>print(delta),
+                  ),
+                  SizedBox(width: 48)
+                ],
+              ),
+              SizedBox(height: 24)
+            ],
+          ),
         ],
       )));
 
