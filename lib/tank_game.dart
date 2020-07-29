@@ -57,6 +57,8 @@ class TankGame extends Game{
     }
   }
 
+  void onFireButtonTap(){}
+
 
   
 }

@@ -67,6 +67,7 @@ class Tank with BaseComponent {
     //时间增量t 旋转速率
     rotateBody(t);
     rotateTurret(t);
+    moveTank(t);
   }
 
   void rotateBody(double t) {
@@ -136,6 +137,18 @@ class Tank with BaseComponent {
       }
     }
 
+  }
+
+  void moveTank(double t) {
+    if(targetBodyAngle != null){
+      if(bodyAngle == targetBodyAngle){
+        //tank 直线时 移动速度快
+        position = position + Offset.fromDirection(bodyAngle,100*t);//100 是像素
+      }else{
+        //tank旋转时 移动速度要慢
+        position = position + Offset.fromDirection(bodyAngle,50*t);
+      }
+    }
   }
 }
 

@@ -1,4 +1,5 @@
 import 'package:flametankgame/tank_game.dart';
+import 'package:flametankgame/widgets/fire_button.dart';
 import 'package:flametankgame/widgets/joypad.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,11 +26,27 @@ void main()async {
         children: [
 
           tankGame.widget,
-          //摇杆
+
           Column(
             children: [
 
               Spacer(),
+              //发射按钮
+              Row(
+                children: [
+                  SizedBox(width: 48),
+                  FireButton(
+                    onTap: tankGame.onFireButtonTap,
+                  ),
+                  Spacer(),
+                  FireButton(
+                    onTap: tankGame.onFireButtonTap,
+                  ),
+                  SizedBox(width: 48),
+                ],
+              ),
+              SizedBox(height: 20),
+              //摇杆
               Row(
                 children: [
                   SizedBox(width: 48),
@@ -46,6 +63,7 @@ void main()async {
               SizedBox(height: 24)
             ],
           ),
+
         ],
       )));
 
