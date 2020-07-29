@@ -34,11 +34,11 @@ void main()async {
                 children: [
                   SizedBox(width: 48),
                   Joypad(
-                    onchange: (Offset delta)=>print(delta),
+                    onchange: (Offset delta)=>tankGame.onLeftJoypadChange(delta),
                   ),
                   Spacer(),
                   Joypad(
-                    onchange: (Offset delta)=>print(delta),
+                    onchange: (Offset delta)=>tankGame.onRightJoypadChange(delta),
                   ),
                   SizedBox(width: 48)
                 ],

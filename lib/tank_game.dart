@@ -27,6 +27,7 @@ class TankGame extends Game{
   @override
   void update(double t) {
     if(screenSize == null)return;
+    tank.update(t);
   }
 
   @override
@@ -38,6 +39,22 @@ class TankGame extends Game{
       );
     }
 
+  }
+
+  void onLeftJoypadChange(Offset offset){
+    if(offset == Offset.zero){
+      tank.targetBodyAngle = null;
+    }else{
+      tank.targetBodyAngle = offset.direction;//范围（pi,-pi）
+    }
+  }
+
+  void onRightJoypadChange(Offset offset) {
+    if (offset == Offset.zero) {
+      tank.targetTurretAngle = null;
+    } else {
+      tank.targetTurretAngle = offset.direction;
+    }
   }
 
 
