@@ -6,6 +6,7 @@
 import 'dart:ui';
 
 import 'package:flame/game/game.dart';
+import 'package:flametankgame/component/bullet.dart';
 
 import 'component/tank.dart';
 
@@ -13,6 +14,9 @@ class TankGame extends Game{
   Size screenSize;
 
   Tank tank;
+
+  //炮弹
+  List<Bullet> bullets;
 
   @override
   void render(Canvas canvas) {
@@ -22,12 +26,21 @@ class TankGame extends Game{
         , Paint()..color = Color(0xff27ae60));
     //tank
     tank.render(canvas);
+    //bullet
+    bullets.forEach((element) {
+      element.render(canvas);
+    });
   }
 
   @override
   void update(double t) {
     if(screenSize == null)return;
     tank.update(t);
+    bullets.forEach((element) {
+      element.update(t);
+    });
+    //移除飞出屏幕的
+    bullets.removeWhere((element) => element.isOffScreen);
   }
 
   @override
@@ -37,6 +50,9 @@ class TankGame extends Game{
       tank = Tank(
         this,position: Offset(screenSize.width/2,screenSize.height/2),
       );
+    }
+    if(bullets == null){
+      bullets = List();
     }
 
   }
@@ -57,7 +73,9 @@ class TankGame extends Game{
     }
   }
 
-  void onFireButtonTap(){}
+  void onFireButtonTap(){
+    bullets.add(Bullet(this,position: tank.getBulletOffset(),angle: tank.getBulletAngle()));
+  }
 
 
   

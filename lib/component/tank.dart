@@ -150,6 +150,26 @@ class Tank with BaseComponent {
       }
     }
   }
+
+  ///获取炮弹发射位置
+  Offset getBulletOffset() {
+    return position +
+        Offset.fromDirection(
+          getBulletAngle(),
+          36,
+        );
+  }
+
+  double getBulletAngle() {
+    double bulletAngle = bodyAngle + turretAngle;
+    while (bulletAngle > pi) {
+      bulletAngle -= pi * 2;
+    }
+    while (bulletAngle < -pi) {
+      bulletAngle += pi * 2;
+    }
+    return bulletAngle;
+  }
 }
 
 
